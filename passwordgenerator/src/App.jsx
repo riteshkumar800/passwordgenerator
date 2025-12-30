@@ -8,19 +8,26 @@ function App() {
   const [charallowed, setcharallowed] = useState(false)
   const [numallowed, setnumallowed] = useState(false)
 
-  const passwordGenerator=useCallback(()=>{
-    let pass=""
-    let str="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
-    if(numallowed) str+="1234567890"
+  const passwordGenerator = useCallback(() => {
+    let pass = ""
+    let str = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
+
+    if (numallowed) str += "1234567890"
     if (charallowed) str += "!@#$%^&*-_+=[]{}~`"
 
-    for(i=1;i<=length;i++){
-      let char=Math.loor(Math.random()*str.length+1)
-      pass+=str.charAt(char)
+    // FIXED: i was not declared
+    for (let i = 1; i <= length; i++) {
+
+      // FIXED: Math.loor → Math.floor
+      // FIXED: random index logic
+      let char = Math.floor(Math.random() * str.length)
+      pass += str.charAt(char)
     }
+
     setpassword(pass)
 
-  },[length,password,charallowed,numallowed,setpassword])
+  // FIXED: removed unnecessary dependencies (password, setpassword)
+  }, [length, charallowed, numallowed])
 
   useEffect(() => {
     passwordGenerator()
@@ -47,7 +54,6 @@ function App() {
           </button>
         </div>
 
-        {/* FIXED: gap-x-15 was invalid Tailwind */}
         <div className='flex text-2xl gap-x-4'>
 
           <div className='flex text-amber-600 items-center gap-x-2'>
@@ -58,7 +64,8 @@ function App() {
               value={length} 
               className='cursor-pointer'
               onChange={(e)=>{ 
-                setLength(e.target.value) 
+                // FIXED: range value comes as string → convert to number
+                setLength(Number(e.target.value))
               }}
             />
             <label>Length: {length}</label>
@@ -67,21 +74,20 @@ function App() {
           <div className='flex items-center gap-x-1 text-amber-600'>
             <input 
               type="checkbox"  
-              checked={numallowed} 
+              checked={numallowed}
               className='cursor-pointer'
               onChange={()=>setnumallowed(prev => !prev)}
             />
             <label>Numbers</label>
           </div>
 
-          
           <div className='flex items-center gap-x-1 text-amber-600'>
             <input 
               type="checkbox"
-              checked={charallowed} 
+              checked={charallowed}
               className='cursor-pointer'
               onChange={() => {
-                setcharallowed(prev => !prev) 
+                setcharallowed(prev => !prev)
               }}
             />
             <label>Characters</label>
