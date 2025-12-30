@@ -8,8 +8,7 @@ function App() {
   const [charallowed, setcharallowed] = useState(false)
   const [numallowed, setnumallowed] = useState(false)
 
-  // FIXED: variable name consistency (passwordref → passwordRef)
-  const passwordRef = useRef(null)
+  const passwordref=useRef(null)
 
   const passwordGenerator = useCallback(() => {
     let pass = ""
@@ -18,24 +17,26 @@ function App() {
     if (numallowed) str += "1234567890"
     if (charallowed) str += "!@#$%^&*-_+=[]{}~`"
 
+   
     for (let i = 1; i <= length; i++) {
+
+      
       let char = Math.floor(Math.random() * str.length)
       pass += str.charAt(char)
     }
 
     setpassword(pass)
 
+  
   }, [length, charallowed, numallowed])
 
-  const copyPassword = useCallback(() => {
-
-    // FIXED: passwordRef was not attached to input earlier
-    passwordRef.current?.select()
-    passwordRef.current?.setSelectionRange(0, 999)
-
+  const copyPassword=useCallback(()=>{
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0, 999);
     window.navigator.clipboard.writeText(password)
 
-  }, [password])
+
+  },[password])
 
   useEffect(() => {
     passwordGenerator()
@@ -52,19 +53,15 @@ function App() {
 
         <div className='flex w-full shadow rounded-lg overflow-hidden mb-4'>
           <input
-            ref={passwordRef}  {/* FIXED: ref attached for copy/select */}
             value={password}
             type="text"
             placeholder='Password'
             className="outline-none w-full py-2 px-3 bg-amber-50 text-black"
-            readOnly  {/* FIXED: avoids manual edit while copying */}
           />
           <button
-            onClick={copyPassword}
-            className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
-          >
-            copy
-          </button>
+        onClick={copyPassword}
+        className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
+        >copy</button>
         </div>
 
         <div className='flex text-2xl gap-x-4'>
@@ -77,7 +74,8 @@ function App() {
               value={length} 
               className='cursor-pointer'
               onChange={(e)=>{ 
-                setLength(Number(e.target.value)) // FIXED: string → number
+                
+                setLength(Number(e.target.value))
               }}
             />
             <label>Length: {length}</label>
