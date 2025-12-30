@@ -31,6 +31,8 @@ function App() {
   }, [length, charallowed, numallowed])
 
   const copyPassword=useCallback(()=>{
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0, 999);
     window.navigator.clipboard.writeText(password)
 
 
@@ -56,9 +58,10 @@ function App() {
             placeholder='Password'
             className="outline-none w-full py-2 px-3 bg-amber-50 text-black"
           />
-          <button className='bg-blue-700 px-4 text-white cursor-pointer'>
-            Copy
-          </button>
+          <button
+        onClick={copyPassword}
+        className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
+        >copy</button>
         </div>
 
         <div className='flex text-2xl gap-x-4'>
