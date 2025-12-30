@@ -58,7 +58,7 @@ function App() {
               value={length} 
               className='cursor-pointer'
               onChange={(e)=>{ 
-                setLength(e.target.value) // FIXED: setLenght → setLength
+                setLength(e.target.value) 
               }}
             />
             <label>Length: {length}</label>
@@ -67,21 +67,21 @@ function App() {
           <div className='flex items-center gap-x-1 text-amber-600'>
             <input 
               type="checkbox"  
-              checked={numallowed} // FIXED: defaultChecked → checked
+              checked={numallowed} 
               className='cursor-pointer'
               onChange={()=>setnumallowed(prev => !prev)}
             />
             <label>Numbers</label>
           </div>
 
-          {/* FIXED: gap-x-1. (extra dot) */}
+          
           <div className='flex items-center gap-x-1 text-amber-600'>
             <input 
               type="checkbox"
-              checked={charallowed} // FIXED: defaultChecked → checked
+              checked={charallowed} 
               className='cursor-pointer'
               onChange={() => {
-                setcharallowed(prev => !prev) // FIXED: setcharAllowed → setcharallowed
+                setcharallowed(prev => !prev) 
               }}
             />
             <label>Characters</label>
