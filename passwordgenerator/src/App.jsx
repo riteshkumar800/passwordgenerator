@@ -15,18 +15,17 @@ function App() {
     if (numallowed) str += "1234567890"
     if (charallowed) str += "!@#$%^&*-_+=[]{}~`"
 
-    // FIXED: i was not declared
+   
     for (let i = 1; i <= length; i++) {
 
-      // FIXED: Math.loor → Math.floor
-      // FIXED: random index logic
+      
       let char = Math.floor(Math.random() * str.length)
       pass += str.charAt(char)
     }
 
     setpassword(pass)
 
-  // FIXED: removed unnecessary dependencies (password, setpassword)
+  
   }, [length, charallowed, numallowed])
 
   useEffect(() => {
@@ -64,7 +63,7 @@ function App() {
               value={length} 
               className='cursor-pointer'
               onChange={(e)=>{ 
-                // FIXED: range value comes as string → convert to number
+                
                 setLength(Number(e.target.value))
               }}
             />
