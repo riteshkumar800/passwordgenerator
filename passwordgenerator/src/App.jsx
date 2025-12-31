@@ -12,9 +12,9 @@ function App() {
 
   const passwordGenerator = useCallback(() => {
     let pass = ""
-    let str = ""
+    let str = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
 
-    if (numallowed) str += ""
+    if (numallowed) str += "0123456789"
     if (charallowed) str += "!@#$%^&*-_+=[]{}~`"
 
    
