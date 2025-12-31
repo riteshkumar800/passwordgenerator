@@ -14,7 +14,7 @@ function App() {
     let pass = ""
     let str = ""
 
-    if (numallowed) str += "1234567890"
+    if (numallowed) str += ""
     if (charallowed) str += "!@#$%^&*-_+=[]{}~`"
 
    
